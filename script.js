@@ -22,6 +22,16 @@ const ARTIGOS_PADRAO = [
         tempo: "4 min",
         keywords: "divórcio, casamento, cartório, partilha, família",
         data: "08/06/2026"
+    },
+    {
+        id: "3",
+        titulo: "Preços diferenciados para Consumidores Idosos: O que diz a Lei?",
+        categoria: "Consumidor",
+        resumo: "Saiba quais são os direitos dos consumidores idosos em relação a preços diferenciados e descontos previstos no Código de Defesa do Consumidor.",
+        conteudo: "<p>O preço diferenciado para consumidores idosos é regulamentado pela Lei 10.715/2003, que estabelece que os estabelecimentos comerciais devem oferecer descontos de até 20% para idosos com idade igual ou superior a 60 anos.</p>",
+        tempo: "7 min",
+        keywords: "mercado, preco, preços, consumidor, idoso, desconto, direitos, consumidor idoso, código de defesa do consumidor, cdc, lei 10.715/2003, descontos para idosos, direitos do consumidor idoso, legislação de proteção ao consumidor idoso",
+        data: "08/06/2026"
     }
 ];
 
