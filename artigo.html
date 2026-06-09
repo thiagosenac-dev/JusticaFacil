@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leitura - Justiça Fácil</title>
+
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Merriweather:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body style="background-color: #fff;">
+
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <i class="ph ph-scales" style="color: var(--brand-blue);"></i> Justiça Fácil
+            </div>
+            <nav>
+                <a href="index.html" class="btn-outline" style="border: none; padding-left: 0; margin-top: 0;">
+                    <i class="ph ph-arrow-left"></i> Voltar para o início
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container" style="max-width: 800px; padding-top: 4rem; padding-bottom: 6rem;">
+
+        <div id="loading" style="text-align: center; color: var(--text-secondary);">
+            <p>Carregando o artigo...</p>
+        </div>
+
+        <article id="artigo-container" style="display: none;">
+
+            <div class="article-header">
+                <span id="artigo-categoria" class="badge">Categoria</span>
+                <h1 id="artigo-titulo">Título do Artigo</h1>
+
+                <div class="article-meta">
+                    <span><i class="ph ph-calendar-blank"></i> <span id="artigo-data">...</span></span>
+                    <span><i class="ph ph-clock"></i> <span id="artigo-tempo">...</span></span>
+                    <span><i class="ph ph-user"></i> Escrito por Especialista</span>
+                </div>
+            </div>
+
+            <hr class="divider" style="margin: 2rem 0;">
+
+            <div id="artigo-conteudo" class="article-body">
+            </div>
+
+        </article>
+
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Justiça Fácil.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', carregarArtigoCompleto);
+    </script>
+</body>
+
+</html>

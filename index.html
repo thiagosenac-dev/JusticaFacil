@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Justiça Fácil - Seus direitos sem complicações</title>
+
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Merriweather:wght@400;700;900&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <i class="ph ph-scales" style="color: var(--brand-blue);"></i> Justiça Fácil
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#">Início</a></li>
+                    <li><a href="login.html" class="btn-login">Área Restrita</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-overlay"></div>
+        <div class="container hero-container">
+            <span class="hero-tag">Direito para todos</span>
+            <h1>A justiça não precisa ser <br>um bicho de sete cabeças.</h1>
+            <p>Traduzimos as leis para o português do dia a dia. Digite seu problema e descubra seus direitos agora
+                mesmo.</p>
+
+            <div class="search-wrapper">
+                <div class="search-box">
+                    <i class="ph ph-magnifying-glass search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Ex: produto quebrado, pensão, demissão..."
+                        onkeyup="filtrarArtigos()">
+                    <button onclick="buscarComScroll()">Buscar</button>
+                </div>
+            </div>
+
+            <div class="tags-populares">
+                <span>Buscas frequentes:</span>
+                <button onclick="preencherBusca('trabalho')">Trabalho</button>
+                <button onclick="preencherBusca('divórcio')">Divórcio</button>
+                <button onclick="preencherBusca('consumidor')">Consumidor</button>
+            </div>
+        </div>
+    </section>
+
+    <main class="container section-container">
+
+        <div class="section-header">
+            <h2>Navegue por temas</h2>
+            <div class="header-line"></div>
+        </div>
+
+        <div class="grid-categories">
+            <div class="category-card" onclick="filtrarPorCategoria('Trabalho')">
+                <div class="icon-box"><i class="ph ph-briefcase"></i></div>
+                <h3>Trabalho</h3>
+                <p>Direitos do trabalhador CLT.</p>
+            </div>
+            <div class="category-card" onclick="filtrarPorCategoria('Consumidor')">
+                <div class="icon-box"><i class="ph ph-shopping-cart"></i></div>
+                <h3>Consumidor</h3>
+                <p>Compras e serviços.</p>
+            </div>
+            <div class="category-card" onclick="filtrarPorCategoria('Família')">
+                <div class="icon-box"><i class="ph ph-users-three"></i></div>
+                <h3>Família</h3>
+                <p>Casamento e herança.</p>
+            </div>
+            <div class="category-card" onclick="filtrarPorCategoria('Penal')">
+                <div class="icon-box"><i class="ph ph-gavel"></i></div>
+                <h3>Penal</h3>
+                <p>Justiça criminal.</p>
+            </div>
+        </div>
+
+        <div class="section-header" id="secao-artigos" style="margin-top: 4rem;">
+            <h2>Artigos em Destaque</h2>
+            <div class="header-line"></div>
+            <p class="subtitle">Explicações claras para as dúvidas mais comuns.</p>
+        </div>
+
+        <div id="no-results" class="hidden">
+            <div class="empty-state">
+                <div class="empty-icon"><i class="ph ph-magnifying-glass"></i></div>
+                <h3>Nenhum resultado encontrado</h3>
+                <p>Tente palavras mais simples ou navegue pelas categorias acima.</p>
+                <button onclick="limparBusca()" class="btn-outline">Ver tudo</button>
+            </div>
+        </div>
+
+        <div class="grid-articles" id="articlesGrid">
+        </div>
+
+    </main>
+
+    <section class="contact-section">
+        <div class="container contact-container">
+            <div class="contact-text">
+                <h2>Não encontrou o que procurava?</h2>
+                <p>Nossa equipe está sempre criando novos conteúdos. Mande sua dúvida específica e ela poderá virar o
+                    próximo artigo!</p>
+            </div>
+
+            <div class="contact-form-wrapper">
+                <form id="formDuvida" onsubmit="event.preventDefault(); enviarDuvida();">
+                    <div class="form-group">
+                        <label style="color: var(--text-main);">Seu Nome</label>
+                        <input type="text" id="contatoNome" required placeholder="Como podemos te chamar?">
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label style="color: var(--text-main);">E-mail</label>
+                            <input type="email" id="contatoEmail" required placeholder="seu@email.com">
+                        </div>
+                        <div class="form-group">
+                            <label style="color: var(--text-main);">Telefone / WhatsApp</label>
+                            <input type="tel" id="contatoTel" placeholder="(00) 00000-0000">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label style="color: var(--text-main);">Qual é a sua dúvida?</label>
+                        <textarea id="contatoMsg" rows="4" required
+                            placeholder="Descreva brevemente o seu caso..."></textarea>
+                    </div>
+
+                    <button type="submit" id="btnEnviarDuvida" class="btn-login"
+                        style="width: 100%; border:none; cursor: pointer; display:flex; justify-content: center; font-size: 1rem;">
+                        Enviar minha dúvida
+                    </button>
+                </form>
+
+                <div id="msgSucesso" class="success-box hidden">
+                    <i class="ph ph-check-circle" style="font-size: 2rem; color: #10b981;"></i>
+                    <h3 style="color: var(--brand-dark);">Dúvida registrada com sucesso!</h3>
+                    <p style="color: var(--text-secondary);">Obrigado. Nossa equipe analisará sua sugestão.</p>
+                    <button onclick="novaDuvida()" class="btn-outline"
+                        style="margin-top: 1rem; font-size: 0.8rem;">Enviar outra</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Justiça Fácil.</p>
+            <p class="footer-sub">Projeto acadêmico alinhado ao <strong>ODS 16</strong>.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
