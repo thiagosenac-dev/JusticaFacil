@@ -21,7 +21,7 @@ const ARTIGOS_PADRAO = [
         conteudo: "<p>O divórcio consensual por via administrativa, instituído pela Lei 11.441/07, permitiu desburocratizar drasticamente a dissolução do casamento no Brasil.</p><p>Para que o processo possa ser realizado diretamente em um Cartório de Notas, é obrigatório o cumprimento de alguns requisitos fundamentais: o consenso mútuo entre o casal sobre todas as condições (partilha de bens, pensão alimentícia, etc.) e a <strong>ausência de filhos menores ou incapazes</strong> (ou grávidas).</p><p>Mesmo sendo realizado fora do tribunal, a presença de um <strong>advogado ou defensor público</strong> é obrigatória por lei para assinar a escritura pública. O processo costuma ser resolvido em poucos dias, gerando economia de tempo e custos emocionais e financeiros.</p>",
         tempo: "4 min",
         keywords: "divórcio, casamento, cartório, partilha, família",
-        data: "08/06/2026"
+        data: "03/02/2026"
     },
     {
         id: "3",
@@ -31,6 +31,16 @@ const ARTIGOS_PADRAO = [
         conteudo: "<p>O preço diferenciado para consumidores idosos é regulamentado pela Lei 10.715/2003, que estabelece que os estabelecimentos comerciais devem oferecer descontos de até 20% para idosos com idade igual ou superior a 60 anos.</p>",
         tempo: "7 min",
         keywords: "mercado, preco, preços, consumidor, idoso, desconto, direitos, consumidor idoso, código de defesa do consumidor, cdc, lei 10.715/2003, descontos para idosos, direitos do consumidor idoso, legislação de proteção ao consumidor idoso",
+        data: "08/06/2026"
+    },
+    {
+        id: "4",
+        titulo: "Cometeu um crime? Saiba como funciona a audiência de custódia e seus direitos",
+        categoria: "Penal",
+        resumo: "A audiência de custódia é um procedimento legal que ocorre após a prisão de uma pessoa acusada de um crime. Durante essa audiência, o juiz determina se a pessoa pode ser solta ou mantida em liberdade provisória.",
+        conteudo: "<p>Audiência de custódia é um procedimento legal que ocorre após a prisão de uma pessoa acusada de um crime. Durante essa audiência, o juiz determina se a pessoa pode ser solta ou mantida em liberdade provisória.</p>",
+        tempo: "3 min",
+        keywords: "criminal, justica, justiça, custódia, custodia, crime, preso, audiencia, audiência, audiência de custódia, direitos do preso, liberdade provisória, prisão, processo penal, justiça criminal, direitos humanos, sistema prisional",
         data: "08/06/2026"
     }
 ];
