@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Administrativo - Justiça Fácil</title>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Merriweather:wght@700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<body style="background-color: #f8fafc;">
+
+    <header style="background: var(--brand-dark); color: white; border: none;">
+        <div class="container header-content">
+            <div class="logo" style="color: white;">
+                <i class="ph ph-lock-key-open"></i> Área Restrita
+            </div>
+            <nav>
+                <ul>
+                    <li style="color: #cbd5e1;">Olá, Administrador</li>
+                    <li>
+                        <button onclick="logout()" class="btn-outline"
+                            style="color: white; border-color: rgba(255,255,255,0.3); padding: 0.4rem 1rem; margin-top: 0;">Sair</button>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="admin-nav-container">
+        <div class="container">
+            <nav class="admin-nav">
+                <button class="nav-btn active" onclick="trocarAba('dashboard', this)">
+                    <i class="ph ph-squares-four"></i> Visão Geral
+                </button>
+                <button class="nav-btn" onclick="trocarAba('artigos', this)">
+                    <i class="ph ph-article"></i> Gerenciar Artigos
+                </button>
+                <button class="nav-btn" onclick="trocarAba('duvidas', this)">
+                    <i class="ph ph-chats-circle"></i> Dúvidas <span id="badge-duvidas"
+                        class="nav-badge hidden">0</span>
+                </button>
+            </nav>
+        </div>
+    </div>
+
+    <main class="container section-container" style="padding-top: 2rem;">
+
+        <section id="tab-dashboard" class="tab-content active">
+            <div class="dashboard-grid">
+                <div class="dash-card">
+                    <div class="dash-icon" style="background: #eff6ff; color: var(--brand-blue);">
+                        <i class="ph ph-article"></i>
+                    </div>
+                    <div>
+                        <h3 id="dash-total-artigos">0</h3>
+                        <p>Artigos Publicados</p>
+                    </div>
+                </div>
+                <div class="dash-card">
+                    <div class="dash-icon" style="background: #fff7ed; color: var(--accent);">
+                        <i class="ph ph-chats-circle"></i>
+                    </div>
+                    <div>
+                        <h3 id="dash-total-duvidas">0</h3>
+                        <p>Dúvidas Recebidas</p>
+                    </div>
+                </div>
+                <div class="dash-card">
+                    <div class="dash-icon" style="background: #f0fdf4; color: #16a34a;">
+                        <i class="ph ph-users"></i>
+                    </div>
+                    <div>
+                        <h3>50K+</h3>
+                        <p>Leitores Mensais</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="admin-panel-card" style="margin-top: 2rem;">
+                <div class="section-header">
+                    <h2>Categorias em Alta</h2>
+                    <p>Distribuição do conteúdo cadastrado na plataforma.</p>
+                </div>
+                <div class="category-stats" id="lista-categorias-stats">
+                    <p style="color: #94a3b8;">Carregando estatísticas...</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="tab-artigos" class="tab-content hidden">
+            <div class="admin-panel-card">
+                <div class="section-header" style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <h2>Artigos Cadastrados</h2>
+                        <p>Lista completa de conteúdo jurídico.</p>
+                    </div>
+                    <button onclick="abrirModal()" class="btn-save"
+                        style="display: flex; align-items: center; gap: 0.5rem;">
+                        <i class="ph ph-plus"></i> Novo Artigo
+                    </button>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Título</th>
+                                <th>Categoria</th>
+                                <th>Data</th>
+                                <th style="text-align: right;">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabelaArtigos">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section id="tab-duvidas" class="tab-content hidden">
+            <div class="admin-panel-card" style="border-top: 4px solid var(--accent);">
+                <div class="section-header">
+                    <h2>Dúvidas da Comunidade</h2>
+                    <p>Mensagens enviadas pelos usuários.</p>
+                </div>
+                <div class="table-responsive">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Data</th>
+                                <th>Nome / Contato</th>
+                                <th>Dúvida</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabelaDuvidas">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="modalArtigo" class="modal-overlay hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Novo Artigo</h2>
+                <button onclick="fecharModal()" class="btn-close"><i class="ph ph-x"></i></button>
+            </div>
+
+            <form id="formArtigo" onsubmit="event.preventDefault(); salvarArtigo();">
+                <input type="hidden" id="artigoId">
+                <div class="modal-body">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Título</label>
+                            <input type="text" id="titulo" required placeholder="Ex: Direitos na demissão">
+                        </div>
+                        <div class="form-group">
+                            <label>Categoria</label>
+                            <select id="categoria" required>
+                                <option value="Trabalho">Trabalho</option>
+                                <option value="Consumidor">Consumidor</option>
+                                <option value="Família">Família</option>
+                                <option value="Penal">Penal</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Resumo (aparece no card)</label>
+                        <textarea id="resumo" rows="2" required placeholder="Texto curto para a capa..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Conteúdo Completo</label>
+                        <textarea id="conteudo" rows="8" placeholder="Texto completo da lei..."></textarea>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Tempo de Leitura</label>
+                            <input type="text" id="tempo" placeholder="Ex: 5 min">
+                        </div>
+                        <div class="form-group">
+                            <label>Palavras-chave</label>
+                            <input type="text" id="keywords" placeholder="Ex: demissão, fgts">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" onclick="fecharModal()" class="btn-cancel">Cancelar</button>
+                    <button type="submit" class="btn-save">Salvar Artigo</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            verificarSessao();
+            carregarTudoAdmin();
+        });
+    </script>
+</body>
+
+</html>
